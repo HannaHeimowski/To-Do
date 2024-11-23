@@ -25,7 +25,6 @@ function createNewList() {
 function createListElement(listName) {
   const listDiv = document.createElement("div");
   listDiv.classList.add("list");
-
   listDiv.innerHTML = `
     <div class="list-header">
       <div class="list-row">
@@ -42,10 +41,18 @@ function createListElement(listName) {
     </div>
     <div class="tasks"></div>
   `;
-
   setupListHeaderEvents(listDiv);
   setupTaskFunctionality(listDiv);
   return listDiv;
+}
+
+function editListName(titleElement) {
+  const newName = prompt("Neuer Name für die Liste:", titleElement.textContent);
+  if (newName && newName.trim() !== "") {
+    titleElement.textContent = newName.trim();
+  } else {
+    alert("Der Listenname darf nicht leer sein.");
+  }
 }
 
 // Event-Listener für Listen und Tasks setzen
@@ -108,6 +115,19 @@ function attachTaskEvents(taskDiv) {
       saveListsToStorage();
     }
   };
+}
+
+function editTask(taskDiv) {
+  const taskNameElement = taskDiv.querySelector(".taskname");
+  const newTaskName = prompt(
+    "Neuer Name für die Aufgabe:",
+    taskNameElement.textContent
+  );
+  if (newTaskName && newTaskName.trim() !== "") {
+    taskNameElement.textContent = newTaskName.trim();
+  } else {
+    alert("Der Aufgabenname darf nicht leer sein.");
+  }
 }
 
 // Lokale Speicherfunktion
