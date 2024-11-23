@@ -1,9 +1,13 @@
-document.addEventListener("DOMContentLoaded", loadListsFromStorage);
+// Stelle sicher, dass der Zustand beim Laden der Seite wiederhergestellt wird
+document.addEventListener("DOMContentLoaded", () => {
+  loadListsFromStorage();
+});
 
 document.querySelector("#newList").onclick = createNewList;
 
-// Funktion zum Erstellen einer neuen Liste
+// Funktion, um eine neue Liste zu erstellen
 function createNewList() {
+  const listsContainer = document.getElementById("listsContainer");
   const listName = prompt("Gib den Namen für die neue Liste ein:");
   if (!listName || listName.trim() === "") {
     alert("Der Listenname darf nicht leer sein.");
@@ -11,21 +15,25 @@ function createNewList() {
   }
 
   const listDiv = createListElement(listName);
-  document.getElementById("listsContainer").appendChild(listDiv);
-  saveListsToStorage(); // Speichern, nachdem eine neue Liste erstellt wurde
+  listsContainer.appendChild(listDiv);
+
+  // Zustand speichern
+  saveListsToStorage();
 }
 
-// Funktion zum Erstellen eines Listenelements
+// Funktion, um das DOM-Element einer Liste zu erstellen
 function createListElement(listName) {
   const listDiv = document.createElement("div");
   listDiv.classList.add("list");
 
   listDiv.innerHTML = `
     <div class="list-header">
-      <h2 class="list-title">${listName}</h2>
-      <div class="list-buttons">
-        <button class="editList"><i class="fas fa-edit"></i></button>
-        <button class="deleteList"><i class="far fa-trash-alt"></i></button>
+      <div class="list-row">
+        <h2 class="list-title">${listName}</h2>
+        <div class="list-buttons">
+          <button class="editList"><i class="fas fa-edit"></i></button>
+          <button class="deleteList"><i class="far fa-trash-alt"></i></button>
+        </div>
       </div>
     </div>
     <div class="newtask">
@@ -37,36 +45,21 @@ function createListElement(listName) {
 
   setupListHeaderEvents(listDiv);
   setupTaskFunctionality(listDiv);
-
   return listDiv;
 }
 
-// Event-Listener für Listen-Header setzen
+// Event-Listener für Listen und Tasks setzen
 function setupListHeaderEvents(listDiv) {
-  // Editierfunktion für den Listennamen
   listDiv.querySelector(".editList").onclick = () => {
     editListName(listDiv.querySelector(".list-title"));
     saveListsToStorage();
   };
-  
-  // Löschen der Liste
   listDiv.querySelector(".deleteList").onclick = () => {
     listDiv.remove();
     saveListsToStorage();
   };
 }
 
-// Funktion zum Bearbeiten des Listennamens
-function editListName(titleElement) {
-  const newName = prompt("Gib einen neuen Namen für die Liste ein:", titleElement.textContent);
-  if (newName && newName.trim() !== "") {
-    titleElement.textContent = newName;
-  } else {
-    alert("Der Listenname darf nicht leer sein.");
-  }
-}
-
-// Event-Listener für Aufgaben
 function setupTaskFunctionality(listDiv) {
   const taskInput = listDiv.querySelector(".newtask input");
   const addTaskButton = listDiv.querySelector(".addTask");
@@ -75,7 +68,7 @@ function setupTaskFunctionality(listDiv) {
   addTaskButton.onclick = () => {
     const taskText = taskInput.value.trim();
     if (!taskText) {
-      alert("Bitte gebe eine Aufgabe ein!");
+      alert("Please enter a Task");
       return;
     }
     addTask(tasksContainer, taskText);
@@ -84,11 +77,9 @@ function setupTaskFunctionality(listDiv) {
   };
 }
 
-// Aufgabe hinzufügen
 function addTask(tasksContainer, taskText) {
   const taskDiv = document.createElement("div");
   taskDiv.classList.add("task");
-
   taskDiv.innerHTML = `
     <span class="taskname">${taskText}</span>
     <div class="task-buttons">
@@ -96,12 +87,10 @@ function addTask(tasksContainer, taskText) {
       <button class="delete"><i class="far fa-trash-alt"></i></button>
     </div>
   `;
-
   tasksContainer.appendChild(taskDiv);
   attachTaskEvents(taskDiv);
 }
 
-// Event-Listener für Tasks
 function attachTaskEvents(taskDiv) {
   taskDiv.querySelector(".delete").onclick = () => {
     taskDiv.remove();
@@ -121,18 +110,7 @@ function attachTaskEvents(taskDiv) {
   };
 }
 
-// Funktion zum Bearbeiten einer Aufgabe
-function editTask(taskDiv) {
-  const taskName = taskDiv.querySelector(".taskname");
-  const newTaskName = prompt("Bearbeite die Aufgabe:", taskName.textContent);
-  if (newTaskName && newTaskName.trim() !== "") {
-    taskName.textContent = newTaskName;
-  } else {
-    alert("Der Aufgabenname darf nicht leer sein.");
-  }
-}
-
-// Speichern von Listen und Aufgaben im lokalen Speicher
+// Lokale Speicherfunktion
 function saveListsToStorage() {
   const listsContainer = document.getElementById("listsContainer");
   const lists = [];
@@ -153,7 +131,6 @@ function saveListsToStorage() {
   localStorage.setItem("todoLists", JSON.stringify(lists));
 }
 
-// Laden der gespeicherten Listen aus dem lokalen Speicher
 function loadListsFromStorage() {
   const storedLists = localStorage.getItem("todoLists");
   if (storedLists) {
