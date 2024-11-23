@@ -1,1 +1,202 @@
+/* h1 {
+  text-decoration: underline;
+} */
+*,
+*:before,
+*:after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  height: 100vh;
+  width: 100%;
+  background: linear-gradient(135deg, aqua, tomato);
+  background-repeat: no-repeat; /* Keine Wiederholung des Hintergrunds */
+  background-size: cover; /* Passt den Hintergrund an den sichtbaren Bereich an */
+  background-attachment: fixed; /* Fixiert das Bild beim Scrollen */
+  margin: 0; /* Entfernt zusätzliche Ränder */
+  font-family: "Poppins", sans-serif;
+}
+
+
+.container {
+  height: auto
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 40px;
+}
+
+h1 {
+  color: black;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+  margin-top: 51px;
+}
+
+h2 {
+  color: black;
+  font-family: "Poppins", sans-serif;
+  margin-top: 20px;
+}
+
+#newList {
+  background-color: white;
+  font-family: "Poppins", sans-serif;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+#newList input {
+  width: 70%;
+  height: 45px;
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+  border: solid 2px rgb(203, 198, 198);
+  padding: 12px;
+  color: black;
+  font-weight: 500;
+  position: relative;
+  border-radius: 5px;
+}
+
+#newList input:focus {
+  outline: none;
+  border-color: cornflowerblue;
+}
+
+#newList button {
+  position: relative;
+  float: right;
+  width: 20%;
+  height: 45px;
+  border-radius: 5px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  background-color: aquamarine;
+  border: none;
+  cursor: pointer;
+}
+
+.newtask {
+  background-color: white;
+  padding: 30px 20px;
+  border-radius: 5px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+.newtask input {
+  width: 70%;
+  height: 45px;
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+  border: solid 2px rgb(203, 198, 198);
+  padding: 12px;
+  color: black;
+  font-weight: 500;
+  position: relative;
+  border-radius: 5px;
+}
+
+.newtask input:focus {
+  outline: none;
+  border-color: cornflowerblue;
+}
+
+.newtask button {
+  position: relative;
+  float: right;
+  width: 20%;
+  height: 45px;
+  border-radius: 5px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  background-color: aquamarine;
+  border: none;
+  cursor: pointer;
+}
+
+#tasks {
+  background-color: white;
+  padding: 30px 20px;
+  margin-top: 60px;
+  border-radius: 18px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  position: relative;
+}
+
+.task {
+  background-color: #ffffff;
+  height: 50px;
+  padding: 5px 10px;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid #d1d3d4;
+  cursor: pointer;
+}
+
+.task span {
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  width: 100%;
+  word-break: break-word;
+  padding-right: 13px;
+}
+
+.task .buttons {
+  display: flex;
+  gap: 5px;
+}
+
+.task .task-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+/* #listsContainer > div > div.tasks > div > button.edit */
+
+#listsContainer .list .tasks .task .task-buttons button {
+  background-color: aquamarine;
+  color: #000000;
+  height: 40px;
+  width: 40px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.completed {
+  text-decoration: line-through;
+}
+
+.list-buttons button {
+  background-color: aquamarine;
+  color: #000000;
+  height: 40px;
+  width: 40px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.list-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 34px;
+}
 
