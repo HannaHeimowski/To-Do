@@ -48,7 +48,7 @@ function setupListHeaderEvents(listDiv) {
     editListName(listDiv.querySelector(".list-title"));
     saveListsToStorage();
   };
-
+  
   // Löschen der Liste
   listDiv.querySelector(".deleteList").onclick = () => {
     listDiv.remove();
@@ -58,10 +58,7 @@ function setupListHeaderEvents(listDiv) {
 
 // Funktion zum Bearbeiten des Listennamens
 function editListName(titleElement) {
-  const newName = prompt(
-    "Gib einen neuen Namen für die Liste ein:",
-    titleElement.textContent
-  );
+  const newName = prompt("Gib einen neuen Namen für die Liste ein:", titleElement.textContent);
   if (newName && newName.trim() !== "") {
     titleElement.textContent = newName;
   } else {
